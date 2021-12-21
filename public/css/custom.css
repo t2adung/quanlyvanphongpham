@@ -1,0 +1,29 @@
+.main-bg {
+  background-image: url(/images/main_bg.jpg?5cb1e7b5b90e7a8f16866536a4aa53eb);
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+}
+
+.tab-content {
+  min-height: 200px;
+  background: #f8fafc;
+  border-top: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 20px;
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+
+.btn-report {
+  width: 250px;
+}
+
