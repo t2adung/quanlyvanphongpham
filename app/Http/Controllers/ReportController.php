@@ -26,13 +26,13 @@ class ReportController extends Controller
         return view('report.index');
     }
 
-    public function create()
+    public function confirm($type, $year, $month)
     {
-        
+        return view('report.confirm');
     }
 
-    public function update() 
+    public function export($type, $year, $month) 
     {
-
+        
     }
 }
