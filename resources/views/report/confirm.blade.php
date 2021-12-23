@@ -9,34 +9,35 @@
 				<div class="card-body">
 					<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
 						<li class="nav-item">
-							<a class="nav-link" id="home-tab" href="{{ route('products', ['type' => 1]) }}">QUẢN LÝ DANH SÁCH VPP</a>
+							<a class="nav-link" id="home-tab" href="{{ route('products') }}">QUẢN LÝ DANH SÁCH VPP</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link active" id="profile-tab" href="{{ route('reports') }}">IN BÁO CÁO</a>
 						</li>
-					</ul>
+					</ul>	
 					<div class="tab-content" id="myTabContent">
-					<div class="container-xl">
-						<div class="table-responsive">
-							<div class="table-wrapper">
-								<div class="table-title">
-									<div class="row">
-										<div class="col-sm-6"><h4>Xác nhận report</h4></div>
-										<div class="col-sm-6 text-right">
-											<a href="#addModal" class="btn btn-success btn-sm" data-toggle="modal"><span>Xuất excel</span></a>						
+						<div class="container-xl">
+							<div class="table-responsive">
+								<div class="table-wrapper">
+									<div class="table-title">
+										<div class="row">
+											<div class="col-sm-6"><h4>Xác nhận report</h4></div>
+											<div class="col-sm-6 text-right">
+												<a href="#addModal" class="btn btn-success btn-sm" data-toggle="modal"><span>Xuất excel</span></a>	
+												<a href="{{ route('reports') }}" class="btn btn-success btn-sm" data-toggle="modal"><span>Huỷ</span></a>						
+											</div>
 										</div>
 									</div>
+									<div>
+										nội dung report
+										<br/>
+										<br/>
+										<br/>
+									</div>
 								</div>
-								<div>
-									nội dung rad2deg
-
-									<br/>
-									<br/>
-									<br/>
-								</div>
-							</div>
-						</div>  
-					</div>
+							</div>  
+						</div>
+					</div>	
 				</div>
 			</div>
 		</div>     

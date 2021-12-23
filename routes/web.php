@@ -16,18 +16,18 @@ Auth::routes(['register' => false]);
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/register/{type?}', 'HomeController@index')->name('register_edit');;
+Route::get('/order/{type?}', 'HomeController@index')->name('order_edit');;
 
-Route::post('/register/{type}', 'HomeController@register');
+Route::post('/order/{type}', 'HomeController@order');
 
-Route::get('/products/{type?}', 'ProductController@index')->name('products');
+Route::get('/products/{type?}', 'ProductController@index')->middleware('can:isAdmin')->name('products');
 
-Route::post('/products/create', 'ProductController@create');
+Route::post('/products/create', 'ProductController@create')->middleware('can:isAdmin');
 
-Route::put('/products/{id}', 'ProductController@update');
+Route::put('/products/{id}', 'ProductController@update')->middleware('can:isAdmin');
 
-Route::get('/reports', 'ReportController@index')->name('reports');
+Route::get('/reports', 'ReportController@index')->middleware('can:isAdmin')->name('reports');
 
-Route::get('/reports/{type}/{year}/{month}/confirm', 'ReportController@confirm');
+Route::get('/reports/{type}/{year}/{month}/confirm', 'ReportController@confirm')->middleware('can:isAdmin');
 
-Route::get('/reports/{type}/{year}/{month}/export', 'ReportController@export');
+Route::get('/reports/{type}/{year}/{month}/export', 'ReportController@export')->middleware('can:isAdmin');

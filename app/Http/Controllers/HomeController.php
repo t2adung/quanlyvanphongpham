@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -25,11 +25,15 @@ class HomeController extends Controller
     {
         if ($type == null) {
             $type = 1;
-        }    
-        return view('home', ['type' => $type]);
+        }
+        
+        
+        return view('home', [
+            'type' => $type,
+        ]);
     }
 
-    public function register($type)
+    public function order($type)
     {
         return view('home');
     }

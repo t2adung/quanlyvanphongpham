@@ -9,10 +9,10 @@
                 <div class="card-body">
                     <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link{{ $type == 1 ? ' active' : '' }}" id="home-tab"  href="{{ route('register_edit', ['type' => 1]) }}" role="tab">DANH SÁCH VPP DÙNG CHUNG</a>
+                            <a class="nav-link{{ $type == 1 ? ' active' : '' }}" id="home-tab"  href="{{ route('order_edit', ['type' => config('constants.ORDER_PERSONAL')]) }}" role="tab">DANH SÁCH VPP DÙNG RIÊNG</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link{{ $type == 2 ? ' active' : '' }}" id="profile-tab" href="{{ route('register_edit', ['type' => 2]) }}" role="tab">DANH SÁCH VPP DÙNG RIÊNG</a>
+                            <a class="nav-link{{ $type == 2 ? ' active' : '' }}" id="profile-tab" href="{{ route('order_edit', ['type' => config('constants.ORDER_DEPARTMENT')]) }}" role="tab">DANH SÁCH VPP DÙNG CHUNG</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
