@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -26,10 +27,15 @@ class HomeController extends Controller
         if ($type == null) {
             $type = 1;
         }
-        
-        
+
+        // get products
+        $products = Product::where('type', $type)->orderBy('name')->get();
+
         return view('home', [
             'type' => $type,
+            'products' => $products,
+            'current_month' => date('m'),
+            'current_year' => date('Y'),
         ]);
     }
 

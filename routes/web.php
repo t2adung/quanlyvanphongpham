@@ -16,9 +16,9 @@ Auth::routes(['register' => false]);
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/order/{type?}', 'HomeController@index')->name('order_edit');;
+Route::get('/order/{type?}', 'HomeController@index')->name('orders');
 
-Route::post('/order/{type}', 'HomeController@order');
+Route::post('/order', 'HomeController@order')->name('order_create');
 
 Route::get('/products/{type?}', 'ProductController@index')->middleware('can:isAdmin')->name('products');
 
