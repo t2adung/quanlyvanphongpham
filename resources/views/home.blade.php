@@ -20,6 +20,16 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="orderContent">
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                            {{session('success') }}
+                            </div>
+                        @endif
                         <div class="form-row">
                             <div class="form-group col-md-6">
                             <label for="inputMonth">Tháng</label>
@@ -38,17 +48,17 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Danh sách văn phòng phẩm:</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">DANH SÁCH VPP</div>
                         </div>
                         @foreach ($products as $product)
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" readonly class="form-control-plaintext" value="{{ $product->name }}">
+                                <div class="form-group col-md-4">
+                                    <input type="text" readonly class="form-control-plaintext product_name" value="{{ $product->name }}" name="product_name">
                                 </div> 
                                 <div class="form-group col-md-4">
                                     <input type="hidden" name="product_ids[]" value="{{ $product->id }}">
-                                    <input type="text" class="form-control" placeholder="Số lượng" name="quantities[]">   
+                                    <input type="number" class="form-control" placeholder="Số lượng" name="quantities[]" min="0">   
                                 </div> 
                             </div>
                         @endforeach
@@ -69,18 +79,15 @@
             <form method="post" action="{{ route('order_create') }}">
                 @csrf
                 <div class="modal-header">				
-                    <h4 class="modal-title">Xác nhận danh sách VPP đăng ký - Tháng: <span class="textMonth"></span> Năm <span class="textYear"></span></h4>
+                    <h4 class="modal-title">Xác nhận danh sách VPP đăng ký - Tháng: <span class="textMonth"></span>/<span class="textYear"></span></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        
-                    </div> 
-                    <div class="row">
-                        
-                    </div>                    
+                <div class="modal-body">     
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" name="year">
+                    <input type="hidden" name="month">
+                    <input type="hidden" name="type" value="{{ $type}}">
                     <input type="button" class="btn btn-link" data-dismiss="modal" value="Huỷ   ">
                     <input type="submit" class="btn btn-info" value="Đăng ký"  name="btnCreateOrder">
                 </div>
