@@ -21,7 +21,7 @@
 								<div class="table-wrapper">
 									<div class="table-title">
 										<div class="row">
-											<div class="col-sm-6"></div>
+											<div class="col-sm-6"><h3>Tháng {{ $month}}/{{$year}}</h3></div>
 											<div class="col-sm-6 text-right">
 												<a href="#addModal" class="btn btn-success btn-sm" data-toggle="modal"><span>Xuất excel</span></a>	
 												<a href="{{ route('reports') }}" class="btn btn-success btn-sm"><span>Quay lại</span></a>						

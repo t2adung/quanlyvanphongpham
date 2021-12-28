@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use App\Exports\UserExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -11,6 +12,8 @@ use Maatwebsite\Excel\Facades\Excel;
 class ReportController extends Controller
 {
     public $products_arr;
+    public $users_arr;
+
     /**
      * Create a new controller instance.
      *
@@ -50,7 +53,8 @@ class ReportController extends Controller
             return redirect()->route('reports', ['type' => $type])->with(['error' => 'Data không tìm thấy']);
         }
 
-        $products = Product::all(['id', 'name']);
+
+        $products = Product::orderBy('name')->get();
         $this->products_arr = [];
         foreach ($products as $product) {
             $this->products_arr[$product->id] = $product->name;
@@ -67,6 +71,7 @@ class ReportController extends Controller
             'month' => $month, 
             'year' => $year,
             'data' => $data,
+            'products' => $this->products_arr
         ]);
     }
 
@@ -96,7 +101,29 @@ class ReportController extends Controller
 
     public function getExportDataByUsers($all_orders) 
     {
-        
+        $dep_prods = [];
+        $per_prods = [];
+        foreach ($all_orders as $order) {
+            foreach ($order->products as $product) {
+                if ($order->type == config('constants.ORDER_DEPARTMENT')) {
+                    $dep_prods[$order->user_id][$product->product_id] = $product->quantity;
+                } else {
+                    $per_prods[$order->user_id][$product->product_id] = $product->quantity;
+                }
+            }
+        }
+
+        $users = User::all(['id', 'name']);
+        $this->users_arr = [];
+        foreach ($users as $user) {
+            $this->users_arr[$user->id] = $user->name;
+        }
+
+        return [
+            'department_products' => $dep_prods,
+            'personal_products' => $per_prods,
+            'users' => $this->users_arr,
+        ];
     }
 
     private function calProducts($total_products, $products)
@@ -106,7 +133,7 @@ class ReportController extends Controller
                 $total_products[$product->product_id]['quantity'] += $product->quantity;
             } else {
                 $total_products[$product->product_id]['quantity'] = $product->quantity;
-                $total_products[$product->product_id]['name'] = $this->products_arr[$product->product_id];
+                //$total_products[$product->product_id]['name'] = $this->products_arr[$product->product_id];
             }      
         }
 

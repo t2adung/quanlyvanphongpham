@@ -9,10 +9,10 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($data['department_products'] as $product)  
+    @foreach ($data['department_products'] as $product_id => $product)  
     <tr>
       <th scope="row">{{ $loop->index + 1 }}</th>
-      <td>{{ $product['name'] }}</td>
+      <td>{{ $products[$product_id] }}</td>
       <td>{{ $product['quantity'] }}</td>
     </tr>
     @endforeach
@@ -30,10 +30,10 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($data['personal_products'] as $product)  
+    @foreach ($data['personal_products'] as $product_id => $product)  
     <tr>
       <th scope="row">{{ $loop->index + 1 }}</th>
-      <td>{{ $product['name'] }}</td>
+      <td>{{ $products[$product_id] }}</td>
       <td>{{ $product['quantity'] }}</td>
     </tr>
     @endforeach
