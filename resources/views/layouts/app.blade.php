@@ -58,13 +58,13 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @can('isAdmin')
                                         <a class="dropdown-item" href="{{ route('products') }}">Quản lý văn phòng phẩm</a>
-                                        <a class="dropdown-item" href="{{ route('reports') }}">Reports</a>
+                                        <a class="dropdown-item" href="{{ route('reports') }}">In báo cáo</a>
                                     @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Đăng xuất') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
