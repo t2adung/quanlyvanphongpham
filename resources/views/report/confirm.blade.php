@@ -21,18 +21,19 @@
 								<div class="table-wrapper">
 									<div class="table-title">
 										<div class="row">
-											<div class="col-sm-6"><h4>Xác nhận report</h4></div>
+											<div class="col-sm-6"></div>
 											<div class="col-sm-6 text-right">
 												<a href="#addModal" class="btn btn-success btn-sm" data-toggle="modal"><span>Xuất excel</span></a>	
-												<a href="{{ route('reports') }}" class="btn btn-success btn-sm" data-toggle="modal"><span>Huỷ</span></a>						
+												<a href="{{ route('reports') }}" class="btn btn-success btn-sm"><span>Quay lại</span></a>						
 											</div>
 										</div>
 									</div>
-									<div>
-										nội dung report
-										<br/>
-										<br/>
-										<br/>
+									<div style="margin-top: 20px"> 
+										@if ($type == 1) 
+											@include('report.inc.product')
+										@else
+											@include('report.inc.user')
+										@endif
 									</div>
 								</div>
 							</div>  

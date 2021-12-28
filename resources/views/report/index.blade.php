@@ -9,39 +9,66 @@
 				<div class="card-body">
 					<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
 						<li class="nav-item">
-							<a class="nav-link" id="home-tab" href="{{ route('products', ['type' => 1]) }}">QUẢN LÝ DANH SÁCH VPP</a>
+							<a class="nav-link" id="home-tab" href="{{ route('products') }}">QUẢN LÝ DANH SÁCH VPP</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link active" id="profile-tab" href="{{ route('reports') }}">IN BÁO CÁO</a>
 						</li>
 					</ul>
 					<div class="tab-content" id="myTabContent">
-						<form action="" method="post">
-							<div class="form-row">
-								<div class="form-group col-md-6">
-								<label for="inputMonth">Tháng</label>
-									<select id="inputMonth" class="form-control">
-										<option selected></option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</select>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputYear">Năm</label>
-									<select id="inputYear" class="form-control">
-										<option selected>2022</option>
-										<option>2022</option>
-										<option>2023</option>
-										<option>2024</option>
-										<option>2025</option>
+						@if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                            {{session('success') }}
+                            </div>
+                        @endif
+						<form action="{{ route('report_confirm') }}" method="post">
+							@csrf
+							<div class="form-group row">
+								<label for="inputMonth" class="col-sm-2 col-form-label">Tháng</label>
+								<div class="col-sm-4">
+									<select id="inputMonth" class="form-control" name="month">
+										@for ($i = 1; $i <= 12; $i++)
+											<option value="{{ $i }}" {{ ($i == $current_month) ? ' selected="selected"' : '' }}>Tháng {{ $i }}</option>
+										@endfor
 									</select>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary btn-lg btn-report">In báo cáo<br/>theo VPP</button>
-							<button type="button" class="btn btn-secondary btn-lg btn-report">In báo cáo<br/>theo nhân viên</button>
+							<div class="form-group row">
+								<label for="inputYear" class="col-sm-2 col-form-label">Năm</label>
+								<div class="col-sm-4">
+									<select id="inputYear" class="form-control" name="year">
+										@for ($y = 2021; $y <= 2031; $y++)
+											<option value="{{ $y }}" {{ $y == $current_year ? ' selected' : '' }}>{{ $y }}</option>
+										@endfor
+									</select>
+								</div>
+							</div>
+							<fieldset class="form-group row">
+								<legend class="col-form-label col-sm-2 float-sm-left pt-0">Chọn loại báo cáo</legend>
+								<div class="col-sm-10">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="type" id="productReport" value="1" checked>
+										<label class="form-check-label" for="productReport">
+											In báo cáo theo văn phòng phẩm
+										</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="type" id="userReport" value="2">
+										<label class="form-check-label" for="userReport">
+											In báo cáo theo nhân viên
+										</label>
+									</div>
+								</div>	
+							</fieldset>
+							
+							<div class="form-row">
+								<button type="submit" class="btn btn-primary">Xác nhận</button>
+							</div>		
 						</form>
 					</div>
 				</div>

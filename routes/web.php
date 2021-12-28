@@ -28,6 +28,6 @@ Route::put('/products/{id}', 'ProductController@update')->middleware('can:isAdmi
 
 Route::get('/reports', 'ReportController@index')->middleware('can:isAdmin')->name('reports');
 
-Route::get('/reports/{type}/{year}/{month}/confirm', 'ReportController@confirm')->middleware('can:isAdmin');
+Route::post('/reports/confirm', 'ReportController@confirm')->middleware('can:isAdmin')->name('report_confirm');
 
-Route::get('/reports/{type}/{year}/{month}/export', 'ReportController@export')->middleware('can:isAdmin');
+Route::post('/reports/export', 'ReportController@export')->middleware('can:isAdmin')->name('report_export');
