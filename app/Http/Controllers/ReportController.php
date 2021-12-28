@@ -53,11 +53,15 @@ class ReportController extends Controller
             return redirect()->route('reports', ['type' => $type])->with(['error' => 'Data không tìm thấy']);
         }
 
-
         $products = Product::orderBy('name')->get();
         $this->products_arr = [];
         foreach ($products as $product) {
             $this->products_arr[$product->id] = $product->name;
+            if ($product->type == config('constants.ORDER_DEPARTMENT')) {
+                $department_products[$product->id] = $product->name;
+            } else {
+                $personal_products[$product->id] = $product->name;
+            }
         }
 
         if ($type ==  1) {
@@ -71,7 +75,9 @@ class ReportController extends Controller
             'month' => $month, 
             'year' => $year,
             'data' => $data,
-            'products' => $this->products_arr
+            'products' => $this->products_arr,
+            'department_products' => $department_products,
+            'personal_products' => $personal_products,
         ]);
     }
 

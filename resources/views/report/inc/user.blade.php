@@ -1,6 +1,6 @@
 @if (!empty($data['department_products']))
 <h3><strong>Văn phòng phẩm dùng chung:</strong></h3>
-<table class="table table-bordered">
+<table class="table table-bordered report_table">
   <thead>
     <tr>
         <th scope="col"></th>
@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($products as $product_id => $product_name)  
+    @foreach ($department_products as $product_id => $product_name)  
     <tr>
         <th scope="row">{{ $product_name }}</th>
         @foreach ($data['users'] as $user_id => $name) 
@@ -23,7 +23,7 @@
 @endif
 @if (!empty($data['personal_products']))
 <h3><strong>Văn phòng phẩm dùng riêng:</strong></h3>
-<table class="table table-bordered">
+<table class="table table-bordered report_table">
 <thead>
     <tr>
         <th scope="col"></th>
@@ -33,7 +33,7 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($products as $product_id => $product_name)  
+    @foreach ($personal_products as $product_id => $product_name)  
     <tr>
         <th scope="row">{{ $product_name }}</th>
         @foreach ($data['users'] as $user_id => $name) 
