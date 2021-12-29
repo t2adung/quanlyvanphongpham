@@ -16,28 +16,34 @@
 						</li>
 					</ul>	
 					<div class="tab-content" id="myTabContent">
-						<div class="container-xl">
+						<form action="{{ route('report_export') }}" method="post">
+							<div class="container-xl">
 							<div class="table-responsive">
-								<div class="table-wrapper">
-									<div class="table-title">
-										<div class="row">
-											<div class="col-sm-6"><h3>Tháng {{ $month}}/{{$year}}</h3></div>
-											<div class="col-sm-6 text-right">
-												<a href="#addModal" class="btn btn-success btn-sm" data-toggle="modal"><span>Xuất excel</span></a>	
-												<a href="{{ route('reports') }}" class="btn btn-success btn-sm"><span>Quay lại</span></a>						
+									<div class="table-wrapper">
+										<div class="table-title">
+											<div class="row">
+													@csrf
+													<input type="hidden" name="year" value="{{ $year }}">
+													<input type="hidden" name="month" value="{{ $month }}">
+													<input type="hidden" name="type" value="{{ $type }}">
+													<div class="col-sm-6"><h3>Tháng {{ $month}}/{{$year}}</h3></div>
+													<div class="col-sm-6 text-right">
+														<input type="submit" class="btn btn-primary btn-sm" value="Xuất excel">
+														<input type="button" href="{{ route('reports') }}" class="btn btn-success btn-sm" value="Quay lại">
+													</div>
 											</div>
 										</div>
+										<div style="margin-top: 20px"> 
+											@if ($type == 1) 
+												@include('report.inc.product')
+											@else
+												@include('report.inc.user')
+											@endif
+										</div>
 									</div>
-									<div style="margin-top: 20px"> 
-										@if ($type == 1) 
-											@include('report.inc.product')
-										@else
-											@include('report.inc.user')
-										@endif
-									</div>
-								</div>
-							</div>  
-						</div>
+								</div>  
+							</div>
+						</form>	
 					</div>	
 				</div>
 			</div>

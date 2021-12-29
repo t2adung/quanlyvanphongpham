@@ -1,3 +1,4 @@
+
 @if (!empty($data['department_products']))
 <h3><strong>Văn phòng phẩm dùng chung:</strong></h3>
 <table class="table table-bordered report_table">
@@ -10,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($department_products as $product_id => $product_name)  
+    @foreach ($data['dept_products_arr'] as $product_id => $product_name)  
     <tr>
         <th scope="row">{{ $product_name }}</th>
         @foreach ($data['users'] as $user_id => $name) 
@@ -33,7 +34,7 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($personal_products as $product_id => $product_name)  
+    @foreach ($data['per_products_arr'] as $product_id => $product_name)  
     <tr>
         <th scope="row">{{ $product_name }}</th>
         @foreach ($data['users'] as $user_id => $name) 

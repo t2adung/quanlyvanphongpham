@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductExport;
 use App\Order;
 use App\Product;
 use App\User;
@@ -13,6 +14,9 @@ class ReportController extends Controller
 {
     public $products_arr;
     public $users_arr;
+    public $dept_products_arr;
+    public $per_products_arr;
+    public $is_export = false;
 
     /**
      * Create a new controller instance.
@@ -53,16 +57,7 @@ class ReportController extends Controller
             return redirect()->route('reports', ['type' => $type])->with(['error' => 'Data không tìm thấy']);
         }
 
-        $products = Product::orderBy('name')->get();
-        $this->products_arr = [];
-        foreach ($products as $product) {
-            $this->products_arr[$product->id] = $product->name;
-            if ($product->type == config('constants.ORDER_DEPARTMENT')) {
-                $department_products[$product->id] = $product->name;
-            } else {
-                $personal_products[$product->id] = $product->name;
-            }
-        }
+        $this->getProducts();
 
         if ($type ==  1) {
             $data = $this->getExportDataByProducts($all_orders);
@@ -75,15 +70,53 @@ class ReportController extends Controller
             'month' => $month, 
             'year' => $year,
             'data' => $data,
-            'products' => $this->products_arr,
-            'department_products' => $department_products,
-            'personal_products' => $personal_products,
         ]);
     }
 
-    public function export($type, $year, $month) 
+    public function getProducts() 
     {
-        //return Excel::download(new UserExport, 'users.xlsx');
+        $all_products = Product::orderBy('name')->get();
+        $this->products_arr = [];
+        foreach ($all_products as $product) {
+            $this->products_arr[$product->id] = $product->name;
+            if ($product->type == config('constants.ORDER_DEPARTMENT')) {
+                $this->dept_products_arr[$product->id] = $product->name;
+            } else {
+                $this->per_products_arr[$product->id] = $product->name;
+            }
+        }
+    }
+
+    public function export(Request $request) 
+    {
+        $type = $request->type;
+        $month = $request->month;
+        $year = $request->year;
+
+        $data = [];
+        if (empty($type) || empty($month) || empty($year)) { 
+            return redirect()->route('reports', ['type' => $type])->with(['error' => 'Có lỗi xảy ra. Xin vui lòng thử lại.']);
+        }
+
+        $all_orders = Order::where(['month' => $month, 'year' => $year])->orderBy('created_at')->get();
+        if (count($all_orders) == 0) {
+            return redirect()->route('reports', ['type' => $type])->with(['error' => 'Data không tìm thấy']);
+        }
+
+        $this->getProducts();
+        $this->is_export = true;
+
+        if ($type ==  1) {
+            $data = $this->getExportDataByProducts($all_orders);
+            $data['month'] = $month;
+            $data['year'] = $year;
+            $export = new ProductExport($data);
+            return Excel::download($export, "bao_cao_vpp_$month$year.xlsx");
+        } else {
+            $data = $this->getExportDataByUsers($all_orders);
+            $export = new UserExport($data);
+            return Excel::download($export, "bao_cao_vpp_theo_nv_$month$year.xlsx");
+        }
     }
 
     public function getExportDataByProducts($all_orders) 
@@ -102,6 +135,8 @@ class ReportController extends Controller
         return [
             'department_products' => $dep_prods,
             'personal_products' => $per_prods,
+            'products' => $this->products_arr,
+            'is_export' => $this->is_export
         ];
     }
 
@@ -129,6 +164,9 @@ class ReportController extends Controller
             'department_products' => $dep_prods,
             'personal_products' => $per_prods,
             'users' => $this->users_arr,
+            'dept_products_arr' => $this->dept_products_arr,
+            'per_products_arr' => $this->per_products_arr,
+            'is_export' => $this->is_export
         ];
     }
 
@@ -139,7 +177,6 @@ class ReportController extends Controller
                 $total_products[$product->product_id]['quantity'] += $product->quantity;
             } else {
                 $total_products[$product->product_id]['quantity'] = $product->quantity;
-                //$total_products[$product->product_id]['name'] = $this->products_arr[$product->product_id];
             }      
         }
 
