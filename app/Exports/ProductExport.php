@@ -5,8 +5,9 @@ namespace App\Exports;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ProductExport implements FromView, WithColumnWidths
+class ProductExport implements FromView, ShouldAutoSize
 {
     protected $data;
 
@@ -22,8 +23,8 @@ class ProductExport implements FromView, WithColumnWidths
         ]);
     }
 
-    public function columnWidths(): array
-    {
+    // public function columnWidths(): array
+    /*{
         return [
             'A' => 5,
             'B' => 5, 
@@ -36,6 +37,6 @@ class ProductExport implements FromView, WithColumnWidths
             'I' => 5,
             'J' => 5,
         ];
-    }
+    }*/
 
 }

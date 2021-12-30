@@ -14,36 +14,33 @@
         <tbody>
           @if ($data['is_export'])
           <tr>
-            <td style="text-align:center" colspan="5">NGÂN HÀNG NHÀ NƯỚC</td>
-            <td style="text-align:center" colspan="2">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td style="text-align:center" colspan="5">VIỆT NAM</td>
-            <td style="text-align:center; text-decoration: underline;" colspan="2">Độc lập - Tự do - Hạnh phúc</td>
-            <td></td>
+            <td style="text-align:center" colspan="3">NGÂN HÀNG NHÀ NƯỚC</td>
+            <td style="text-align:center" colspan="4">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td style="text-align:center" colspan="5">CHI NHÁNH TP. HỒ CHÍ MINH</td>
+            <td style="text-align:center" colspan="3">VIỆT NAM</td>
+            <td style="text-align:center; text-decoration: underline;" colspan="4">Độc lập - Tự do - Hạnh phúc</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="text-align:center" colspan="3">CHI NHÁNH TP. HỒ CHÍ MINH</td>
+            <td colspan="2"></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="text-align:center; text-decoration: underline;" colspan="3">PHÒNG KẾ TOÁN - THANH TOÁN</td>
             <td colspan="2"></td>
             <td></td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td style="text-align:center; text-decoration: underline;" colspan="5">PHÒNG KẾ TOÁN - THANH TOÁN</td>
-            <td colspan="2"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="5"></td>
-            <td style="font-style:italic; text-align: right" colspan="2">Thành phố Hồ Chí Minh, ngày __ tháng __  năm __  </td>
+            <td colspan="3"></td>
+            <td style="font-style:italic; text-align: right" colspan="4">Thành phố Hồ Chí Minh, ngày __ tháng __  năm __  </td>
             <td></td>
             <td></td>
             <td></td>

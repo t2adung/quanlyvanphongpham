@@ -29,7 +29,7 @@
 													<div class="col-sm-6"><h3>Tháng {{ $month}}/{{$year}}</h3></div>
 													<div class="col-sm-6 text-right">
 														<input type="submit" class="btn btn-primary btn-sm" value="Xuất excel">
-														<input type="button" href="{{ route('reports') }}" class="btn btn-success btn-sm" value="Quay lại">
+														<a href="{{ route('reports') }}" class="btn btn-success btn-sm">Quay lại</a>
 													</div>
 											</div>
 										</div>
