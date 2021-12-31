@@ -16,7 +16,6 @@ class ReportController extends Controller
     public $users_arr;
     public $dept_products_arr;
     public $per_products_arr;
-    public $is_export = false;
 
     /**
      * Create a new controller instance.
@@ -104,14 +103,15 @@ class ReportController extends Controller
         }
 
         $this->getProducts();
-        $this->is_export = true;
 
         if ($type ==  1) {
             $data = $this->getExportDataByProducts($all_orders);
             $data['month'] = $month;
             $data['year'] = $year;
+            $data['export_pdf'] = !empty($request->exportPdf) ?  true : false;
+            $ext = !empty($request->exportPdf) ?  'pdf' : 'xlsx';
             $export = new ProductExport($data);
-            return Excel::download($export, "bao_cao_vpp_$month$year.xlsx");
+            return Excel::download($export, "bao_cao_vpp_$month$year.$ext");
         } else {
             $data = $this->getExportDataByUsers($all_orders);
             $export = new UserExport($data);
@@ -135,8 +135,7 @@ class ReportController extends Controller
         return [
             'department_products' => $dep_prods,
             'personal_products' => $per_prods,
-            'products' => $this->products_arr,
-            'is_export' => $this->is_export
+            'products' => $this->products_arr
         ];
     }
 
@@ -165,8 +164,7 @@ class ReportController extends Controller
             'personal_products' => $per_prods,
             'users' => $this->users_arr,
             'dept_products_arr' => $this->dept_products_arr,
-            'per_products_arr' => $this->per_products_arr,
-            'is_export' => $this->is_export
+            'per_products_arr' => $this->per_products_arr
         ];
     }
 

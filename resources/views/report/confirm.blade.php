@@ -26,14 +26,16 @@
 													<input type="hidden" name="year" value="{{ $year }}">
 													<input type="hidden" name="month" value="{{ $month }}">
 													<input type="hidden" name="type" value="{{ $type }}">
-													<div class="col-sm-6"><h3>Tháng {{ $month}}/{{$year}}</h3></div>
+													<div class="col-sm-6"></div>
 													<div class="col-sm-6 text-right">
-														<input type="submit" class="btn btn-primary btn-sm" value="Xuất excel">
+														<!-- <input type="submit" class="btn btn-primary btn-sm" name="exportPdf" value="Xuất pdf"> -->
+														<input type="submit" class="btn btn-primary btn-sm" name="exportExcel" value="Xuất excel">
 														<a href="{{ route('reports') }}" class="btn btn-success btn-sm">Quay lại</a>
 													</div>
 											</div>
 										</div>
 										<div style="margin-top: 20px"> 
+											<h3>Tháng {{ $month}}/{{$year}}</h3<br/>
 											@if ($type == 1) 
 												@include('report.inc.product')
 											@else

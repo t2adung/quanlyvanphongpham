@@ -40,5 +40,5 @@ $(function () {
         var quantities = $("input[name='quantities[]']").map(function(){
             return $(this).val();
         }).get();*/
-    })
+    });
 });
