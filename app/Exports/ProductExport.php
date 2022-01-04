@@ -54,7 +54,7 @@ class ProductExport implements FromView, WithColumnWidths, WithStyles, ShouldAut
         $sheet->getStyle("A1:I$highestRow")->getFont()->setName('Times New Roman');
         $sheet->getStyle("A1:I$highestRow")->getFont()->setSize(13);
 
-        $sheet->getRowDimension($highestRow)->setRowHeight(20);
+        //$sheet->getRowDimension($highestRow)->setRowHeight(20);
 
         $sheet->getStyle("A1:I$highestRow")->getAlignment()->setWrapText(true);
     }

@@ -155,7 +155,7 @@
           </tr>
           <tr>
             <td colspan="5"></td>
-            <td colspan="2" style="font-weight: bold; text-align: center">Lâm Ngọc Thủy</td>
+            <td colspan="2" style="font-weight: bold; text-align: center">Lục Nhất Thảo</td>
             <td colspan="3"></td>
           </tr>
         </tbody>

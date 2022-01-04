@@ -1,6 +1,6 @@
 
 @if (!empty($data['department_products']))
-<h3><strong>Văn phòng phẩm dùng chung:</strong></h3>
+<h4><strong>Văn phòng phẩm dùng chung:</strong></h5>
 <table class="table table-bordered report_table">
   <thead>
     <tr>
@@ -23,7 +23,7 @@
 </table>
 @endif
 @if (!empty($data['personal_products']))
-<h3><strong>Văn phòng phẩm dùng riêng:</strong></h3>
+<h4><strong>Văn phòng phẩm dùng riêng:</strong></h3>
 <table class="table table-bordered report_table">
 <thead>
     <tr>
