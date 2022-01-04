@@ -15,7 +15,14 @@
     <tr>
         <th scope="row">{{ $product_name }}</th>
         @foreach ($data['users'] as $user_id => $name) 
-            <td>{{ isset($data['department_products'][$user_id][$product_id]) ? $data['department_products'][$user_id][$product_id] : 0 }}</td>
+          @php
+            $user_quantity = isset($data['department_products'][$user_id][$product_id]) ? $data['department_products'][$user_id][$product_id] : 0;
+          @endphp
+          @if ($user_quantity > 0)
+            <td style="background-color: #ebc7c6;">{{ $user_quantity }}</td>
+          @else
+            <td>{{ $user_quantity }}</td>
+          @endif 
         @endforeach
     </tr>
     @endforeach
@@ -37,9 +44,15 @@
     @foreach ($data['per_products_arr'] as $product_id => $product_name)  
     <tr>
         <th scope="row">{{ $product_name }}</th>
-        @foreach ($data['users'] as $user_id => $name) 
-        
-            <td>{{ isset($data['personal_products'][$user_id][$product_id]) ? $data['personal_products'][$user_id][$product_id] : 0 }}</td>
+        @foreach ($data['users'] as $user_id => $name)  
+          @php
+            $user_quantity = isset($data['personal_products'][$user_id][$product_id]) ? $data['personal_products'][$user_id][$product_id] : 0;
+          @endphp
+          @if ($user_quantity > 0)
+            <td style="background-color: #ebc7c6;">{{ $user_quantity }}</td>
+          @else
+            <td>{{ $user_quantity }}</td>
+          @endif 
         @endforeach
     </tr>
     @endforeach

@@ -2,18 +2,48 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use App\Exports\UserSheetExport;
 
-class UserExport implements FromView
+class UserExport implements WithMultipleSheets
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function view()
+    use Exportable;
+    
+    protected $data;
+
+    public function __construct(array $data)
     {
-        $data = [];
-        return view('exports.user', [
-            'data' => $data,
-        ]);
+        $this->data = $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function sheets(): array
+    {
+        $sheets = [];
+        if (!empty($this->data['department_products'])) {
+            $sheets_data = [
+                'data' => $this->data['department_products'],
+                'products' => $this->data['dept_products_arr'],
+                'users' => $this->data['users'],
+                'is_department' => true,
+            ];
+
+            $sheets[] = new UserSheetExport($sheets_data);
+        }
+        if (!empty($this->data['personal_products'])) {
+            $sheets_data = [
+                'data' => $this->data['personal_products'],
+                'products' => $this->data['per_products_arr'],
+                'users' => $this->data['users'],
+                'is_department' => false,
+            ];
+
+            $sheets[] = new UserSheetExport($sheets_data);
+        }
+    
+        return $sheets;
     }
 }
