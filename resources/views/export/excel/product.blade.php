@@ -33,7 +33,7 @@
             <td></td>
           </tr>
           <tr>
-            <td style="text-align:center; text-decoration: underline;" colspan="5">PHÒNG KẾ TOÁN - THANH TOÁN</td>
+            <td style="text-align:center; text-decoration: underline;" colspan="5"><strong>PHÒNG KẾ TOÁN - THANH TOÁN</strong></td>
             <td colspan="2"></td>
             <td></td>
             <td></td>
