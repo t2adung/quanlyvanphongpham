@@ -34,17 +34,19 @@
                             <div class="form-group col-md-6">
                             <label for="inputMonth">Tháng</label>
                                 <select id="inputMonth" class="form-control" name="inputMonth">
-                                    @for ($i = 1; $i <= 12; $i++)
-                                        <option value="{{ $i }}" {{ ($i == $current_month) ? ' selected="selected"' : '' }}>Tháng {{ $i }}</option>
-                                    @endfor
+                                    <!-- @for ($i = 1; $i <= 12; $i++)
+                                    <option value="{{ $i }}" {{ ($i == $current_month) ? ' selected="selected"' : '' }}>Tháng {{ $i }}</option>
+                                    @endfor -->
+                                    <option value="{{ $current_month }}">Tháng {{ $current_month }}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputYear">Năm</label>
                                 <select id="inputYear" class="form-control" name="inputYear">
-                                    @for ($y = 2021; $y <= 2031; $y++)
+                                    <!-- @for ($y = 2021; $y <= 2031; $y++)
                                         <option value="{{ $y }}" {{ $y == $current_year ? ' selected' : '' }}>{{ $y }}</option>
-                                    @endfor
+                                    @endfor -->
+                                    <option value="{{ $current_year  }}">{{ $current_year  }}</option>
                                 </select>
                             </div>
                         </div>
@@ -58,7 +60,11 @@
                                 </div> 
                                 <div class="form-group col-md-4">
                                     <input type="hidden" name="product_ids[]" value="{{ $product->id }}">
-                                    <input type="number" class="form-control" placeholder="Số lượng" name="quantities[]" min="0">   
+                                    @if (isset($user_products[$product->id]))
+                                        <input type="number" class="form-control" placeholder="Số lượng" name="quantities[]" min="0"  value="{{ $user_products[$product->id] }}">  
+                                    @else 
+                                        <input type="number" class="form-control" placeholder="Số lượng" name="quantities[]" min="0">  
+                                    @endif
                                 </div> 
                             </div>
                         @endforeach

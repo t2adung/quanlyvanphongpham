@@ -36,12 +36,12 @@ class ProductExport implements FromView, WithColumnWidths, WithStyles, ShouldAut
     {
         return [
             'A' => 5,
-            'B' => 5, 
-            'C' => 10,
+            'B' => 10, 
+            'C' => 15,
             'D' => 20,
             'E' => 15,
-            'F' => 25,
-            'G' => 25,
+            'F' => 30,
+            'G' => 30,
             'H' => 5,
             'I' => 5,
             'J' => 5,
@@ -50,6 +50,8 @@ class ProductExport implements FromView, WithColumnWidths, WithStyles, ShouldAut
 
     public function styles(Worksheet $sheet) 
     {
+        $sheet->getPageSetup()->setPaperSize(1);
+        $sheet->getPageSetup()->setFitToWidth(1);
         $highestRow = $sheet->getHighestRow();
         $sheet->getStyle("A1:I$highestRow")->getFont()->setName('Times New Roman');
         $sheet->getStyle("A1:I$highestRow")->getFont()->setSize(13);

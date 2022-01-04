@@ -34,11 +34,26 @@ class HomeController extends Controller
         // get products
         $products = Product::where('type', $type)->orderBy('name')->get();
 
+        $user_order = Order::where([
+            'type' => $type,
+            'month' => date('m'),
+            'year' => date('Y')
+        ])->first();
+
+        $user_product_arr = [];
+        if (!empty($user_order)) {
+            $user_products = $user_order->products->toArray();
+            if (!empty($user_products)) {
+                $user_product_arr = array_column($user_products, 'quantity', 'product_id');
+            }
+        }
+
         return view('home', [
             'type' => $type,
             'products' => $products,
             'current_month' => date('m'),
             'current_year' => date('Y'),
+            'user_products' => $user_product_arr,
         ]);
     }
 
@@ -67,12 +82,20 @@ class HomeController extends Controller
     
             if (!empty($order)) {
                 foreach ($product_ids as $key => $id) {
-                    $order_products = [];
-                    $order_products['order_id'] = $order->id;
-                    $order_products['product_id'] = $id;
-                    $order_products['quantity'] = $product_quantities[$key];
-    
-                    $order_products = OrderProduct::updateOrCreate($order_products);
+                    $user_product = OrderProduct::where([
+                        'order_id' => $order->id,
+                        'product_id' => $id
+                    ])->first();
+                    if (!empty($user_product)) {
+                        $user_product->quantity = $product_quantities[$key];
+                        $user_product->save();
+                    } else {
+                        $order_products = [];
+                        $order_products['order_id'] = $order->id;
+                        $order_products['product_id'] = $id;
+                        $order_products['quantity'] = $product_quantities[$key];
+                        $order_products = OrderProduct::create($order_products);
+                    }
                 }
             }
 

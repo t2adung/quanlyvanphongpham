@@ -72,10 +72,14 @@
             <td style="text-align:center;" colspan="6">Phòng Kế toán – Thanh toán có nhu cầu sử dụng VPP trong tháng {{ $data['month'] }}/{{ $data['year'] }} như sau:</td>
             <td colspan="3"></td>
           </tr>
+          @php
+            $order = 1;
+          @endphp
+    
           @if (!empty($data['department_products']))
           <tr>
             <td></td>
-            <td colspan="6">1. Văn phòng phẩm dùng chung:</td>
+            <td colspan="6">{{$order}}. Văn phòng phẩm dùng chung:</td>
             <td colspan="3"></td>
           </tr>
           <tr>
@@ -98,11 +102,17 @@
             <td></td>
           </tr>
           @endforeach
+          <tr>
+            <td colspan="10">&nbsp;</td>
+          </tr>
+          @php
+            $order = 2;
+          @endphp
           @endif
           @if (!empty($data['personal_products']))
           <tr>
             <td></td>
-            <td colspan="6">2. Văn phòng phẩm cá nhân:</td>
+            <td colspan="6">{{ $order }}. Văn phòng phẩm cá nhân:</td>
             <td colspan="3"></td>
           </tr>
           <tr>
