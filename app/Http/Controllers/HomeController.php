@@ -37,7 +37,8 @@ class HomeController extends Controller
         $user_order = Order::where([
             'type' => $type,
             'month' => date('m'),
-            'year' => date('Y')
+            'year' => date('Y'), 
+            'user_id' => Auth::id(),
         ])->first();
 
         $user_product_arr = [];
