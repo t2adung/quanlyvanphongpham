@@ -9,7 +9,7 @@ $(function () {
         $(this).find('.modal-body').html('');
         $.each($("input[name='quantities[]']"), function(){
             var product_qty = $(this).val();
-            if (product_qty != '' && parseInt(product_qty) > 0) {
+            if (product_qty != '' && parseInt(product_qty) >= 0) {
                 var parent_row = $(this).parent().parent();
                 var product_name = $(parent_row).find("input[name='product_name']").val();
                 var product_id = $(parent_row).find("input[name='product_ids[]']").val();
@@ -40,5 +40,14 @@ $(function () {
         var quantities = $("input[name='quantities[]']").map(function(){
             return $(this).val();
         }).get();*/
+    });
+
+    $('#btnReset').on('click', function() {
+        $.each($("input[name='quantities[]']"), function(){
+            var product_qty = $(this).val();
+            if (product_qty != '' && parseInt(product_qty) > 0) {
+                $(this).val(0);
+            }
+        })
     });
 });

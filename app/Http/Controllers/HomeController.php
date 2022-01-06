@@ -88,14 +88,20 @@ class HomeController extends Controller
                         'product_id' => $id
                     ])->first();
                     if (!empty($user_product)) {
-                        $user_product->quantity = $product_quantities[$key];
-                        $user_product->save();
+                        if ($product_quantities[$key] == 0) {
+                            $user_product->delete();
+                        } else {
+                            $user_product->quantity = $product_quantities[$key];
+                            $user_product->save();
+                        }
                     } else {
-                        $order_products = [];
-                        $order_products['order_id'] = $order->id;
-                        $order_products['product_id'] = $id;
-                        $order_products['quantity'] = $product_quantities[$key];
-                        $order_products = OrderProduct::create($order_products);
+                        if ($product_quantities[$key] > 0) {
+                            $order_products = [];
+                            $order_products['order_id'] = $order->id;
+                            $order_products['product_id'] = $id;
+                            $order_products['quantity'] = $product_quantities[$key];
+                            $order_products = OrderProduct::create($order_products);
+                        }    
                     }
                 }
             }

@@ -71,7 +71,7 @@
                         <div class="text-left">
                             <!-- Button HTML (to Trigger Modal) -->
                             <a href="#orderModal" class="btn btn-primary trigger-btn" data-toggle="modal">Xác nhận</a>
-                            <button type="button" class="btn btn-danger">Reset</button>  
+                            <button type="button" class="btn btn-danger" id="btnReset">Reset</button>  
                         </div> 
                     </div>
                 </div>
