@@ -2,6 +2,7 @@
 require('./bootstrap');
 
 $(function () {
+    /******************** Home ***************************/
     $('#orderModal').on('show.bs.modal', function (event) {
         var order_products = ""; 
         var disable_submit = true;
@@ -36,10 +37,6 @@ $(function () {
         $(this).find('span.textMonth').text(month);
         $(this).find('span.textYear').text(year);
         $(this).find('.modal-body').html(order_products);
-        /*var product_ids = ;
-        var quantities = $("input[name='quantities[]']").map(function(){
-            return $(this).val();
-        }).get();*/
     });
 
     $('#btnReset').on('click', function() {
@@ -49,5 +46,30 @@ $(function () {
                 $(this).val(0);
             }
         })
+    });
+
+    /******************** Product ***************************/
+    $('#editProductModal').on('show.bs.modal', function(e) {
+        var button = $(e.relatedTarget);
+        var product_id = button.data('product-id');
+        var product_name = button.data('product-name');
+        $(this).find('input[name=name]').val(product_name);
+        $(this).find('input[name=id]').val(product_id);
+    });
+
+    $('#deleteProductModal').on('show.bs.modal', function(e) {
+        var button = $(e.relatedTarget);
+        var product_id = button.data('product-id');
+        var product_name = button.data('product-name');
+        $(this).find('input[name=name]').val(product_name);
+        $(this).find('input[name=id]').val(product_id);
+    });
+
+    $('#addProductModal').on('show.bs.modal', function(e) {
+        var button = $(e.relatedTarget);
+        var type = button.data('type');
+        var type_text = (type == 1) ? 'chung' : "riêng";
+        $(this).find('input[name=type]').val(type);
+        $(this).find('.type-text').text(type_text);
     });
 });

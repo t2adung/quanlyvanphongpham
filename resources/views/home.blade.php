@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link{{ $type == 1 ? ' active' : '' }}" id="home-tab"  href="{{ route('orders', ['type' => config('constants.ORDER_PERSONAL')]) }}" role="tab">DANH SÁCH VPP DÙNG RIÊNG</a>
+                            <a class="nav-link{{ $type == config('constants.ORDER_PERSONAL')]) ? ' active' : '' }}" id="home-tab"  href="{{ route('orders', ['type' => config('constants.ORDER_PERSONAL')]) }}" role="tab">DANH SÁCH VPP DÙNG RIÊNG</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link{{ $type == 2 ? ' active' : '' }}" id="profile-tab" href="{{ route('orders', ['type' => config('constants.ORDER_DEPARTMENT')]) }}" role="tab">DANH SÁCH VPP DÙNG CHUNG</a>

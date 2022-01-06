@@ -20,11 +20,11 @@ Route::get('/order/{type?}', 'HomeController@index')->name('orders');
 
 Route::post('/order', 'HomeController@order')->name('order_create');
 
-Route::get('/products/{type?}', 'ProductController@index')->middleware('can:isAdmin')->name('products');
+Route::get('/products', 'ProductController@index')->middleware('can:isAdmin')->name('products');
 
-Route::post('/products/create', 'ProductController@create')->middleware('can:isAdmin');
+Route::post('/products/create', 'ProductController@create')->middleware('can:isAdmin')->name('product_create');
 
-Route::put('/products/{id}', 'ProductController@update')->middleware('can:isAdmin');
+Route::post('/products/update', 'ProductController@update')->middleware('can:isAdmin')->name('product_update');
 
 Route::get('/reports', 'ReportController@index')->middleware('can:isAdmin')->name('reports');
 

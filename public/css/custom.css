@@ -37,7 +37,7 @@
 }
 
 .report_table th:first-child,
-td:first-child {
+.report_table td:first-child {
   position: -webkit-sticky;
   position: sticky;
   left: 0px;

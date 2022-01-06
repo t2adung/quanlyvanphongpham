@@ -34,13 +34,55 @@ class ProductController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        
+        $product_name = $request->name;
+        $type = $request->type;
+        if (empty($product_name) || empty($type)) { 
+            return redirect()->route('products')->with(['error' => 'Có lỗi xảy ra. Xin vui lòng thử lại.']);
+        }
+
+        try {
+            $product = [
+                'name' => $product_name,
+                'type' => $type
+            ];
+            
+            if (Product::create($product)) {
+                return redirect()->route('products')->with(['success' => 'Đăng ký thành công.']);
+            };
+            
+        } catch (\Exception $e) {
+            return redirect()->route('products')->with(['error' => $e->getMessage()]);
+        }
     }
 
-    public function update() 
+    public function update(Request $request) 
     {
+        $product_name = $request->name;
+        $product_id = $request->id;
 
+        if (empty($product_id)) { 
+            return redirect()->route('products')->with(['error' => 'Có lỗi xảy ra. Xin vui lòng thử lại.']);
+        }
+
+        try {
+            $product = Product::find($product_id);
+            if (empty($product)) {
+                return redirect()->route('products')->with(['error' => 'Có lỗi xảy ra. Xin vui lòng thử lại.']);
+            }
+            if (!empty($request->delete)) {
+                $product->type = 0;
+            } else {
+                $product->name = $product_name;
+            }
+                
+            if ($product->save()) {
+                return redirect()->route('products')->with(['success' => 'Cập nhật thành công.']);
+            };
+            
+        } catch (\Exception $e) {
+            return redirect()->route('products')->with(['error' => $e->getMessage()]);
+        }
     }
 }
