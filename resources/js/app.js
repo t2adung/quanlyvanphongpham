@@ -55,7 +55,8 @@ $(function () {
             if (product_qty != '' && parseInt(product_qty) > 0) {
                 $(this).val(0);
             }
-        })
+        });
+        $('textarea[name=description]').val('');
     });
 
     /******************** Product ***************************/

@@ -84,10 +84,8 @@ class HomeController extends Controller
             $order = Order::firstOrCreate($order);
     
             if (!empty($order)) {
-                if ($description != '') {
-                    $order->description = $description;
-                    $order->save();
-                }
+                $order->description = $description;
+                $order->save();
                 foreach ($product_ids as $key => $id) {
                     $user_product = OrderProduct::where([
                         'order_id' => $order->id,

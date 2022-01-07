@@ -37330,6 +37330,7 @@ $(function () {
         $(this).val(0);
       }
     });
+    $('textarea[name=description]').val('');
   });
   /******************** Product ***************************/
 

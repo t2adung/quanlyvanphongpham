@@ -70,11 +70,7 @@
                         @endforeach
                         <div class="form-group">
                             <label for="description">Ghi chú</label>
-                            <textarea class="form-control" id="description" rows="3" name="description"> 
-                                    @if (isset($user_order['description']))
-                                        {{ $user_order['description'] }}
-                                    @endif
-                            </textarea>
+                            <textarea class="form-control" id="description" rows="3" name="description"> @if (isset($user_order['description'])){{ $user_order['description'] }} @endif</textarea>
                         </div>
                         <div class="text-left">
                             <!-- Button HTML (to Trigger Modal) -->
