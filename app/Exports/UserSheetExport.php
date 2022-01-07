@@ -27,8 +27,14 @@ class UserSheetExport implements FromView, WithStyles, ShouldAutoSize, WithTitle
 
     public function styles(Worksheet $sheet) 
     {
+        $sheet->getPageSetup()->setPaperSize(1);
+        $sheet->getPageSetup()->setFitToWidth(1);
         $highestRow = $sheet->getHighestRow();
         $highestColumn = $sheet->getHighestColumn();
+        foreach ($sheet->getColumnDimensions() as $key => $column) {
+            $sheet->getColumnDimension($key)->setAutoSize(false);
+            $sheet->getColumnDimension($key)->setWidth(10);
+        }
         $sheet->getStyle("A1:$highestColumn$highestRow")->getFont()->setName('Times New Roman');
         $sheet->getStyle("A1:$highestColumn$highestRow")->getFont()->setSize(13);
         $sheet->getStyle("A1:$highestColumn$highestRow")->getAlignment()->setWrapText(true);

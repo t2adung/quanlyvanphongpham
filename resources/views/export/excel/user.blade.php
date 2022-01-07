@@ -20,5 +20,16 @@
         @endforeach
     </tr>
     @endforeach
+    <tr>
+        <th scope="row" style="">Ghi chú</th>
+        @foreach ($data['users'] as $user_id => $name) 
+        <td>
+          @php
+            $description = isset($data['descriptions'][$user_id]) ? $data['descriptions'][$user_id] : "";
+          @endphp
+          {{ $description }}
+        </td>
+        @endforeach
+    </tr>
   </tbody>
 </table>

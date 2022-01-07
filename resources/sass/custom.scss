@@ -36,9 +36,6 @@
     border-top: 1px solid #dee2e6;
 }
 
-.report_table th:first-child, .report_table td:first-child
-{
-  position:sticky;
-  left:0px;
-  background-color:#ccc;
+.report_table th, .report_table td {
+    text-overflow: ellipsis;
 }

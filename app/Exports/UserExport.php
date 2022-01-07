@@ -27,6 +27,7 @@ class UserExport implements WithMultipleSheets
             $sheets_data = [
                 'data' => $this->data['department_products'],
                 'products' => $this->data['dept_products_arr'],
+                'descriptions' => $this->data['descriptions'],
                 'users' => $this->data['users'],
                 'is_department' => true,
             ];
@@ -37,6 +38,7 @@ class UserExport implements WithMultipleSheets
             $sheets_data = [
                 'data' => $this->data['personal_products'],
                 'products' => $this->data['per_products_arr'],
+                'descriptions' => $this->data['descriptions'],
                 'users' => $this->data['users'],
                 'is_department' => false,
             ];

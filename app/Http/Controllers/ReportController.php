@@ -143,6 +143,7 @@ class ReportController extends Controller
     {
         $dep_prods = [];
         $per_prods = [];
+        $descriptions = [];
         foreach ($all_orders as $order) {
             foreach ($order->products as $product) {
                 if ($order->type == config('constants.ORDER_DEPARTMENT')) {
@@ -151,6 +152,7 @@ class ReportController extends Controller
                     $per_prods[$order->user_id][$product->product_id] = $product->quantity;
                 }
             }
+            $descriptions[$order->user_id]= $order->description;
         }
 
         $users = User::all(['id', 'name']);
@@ -162,6 +164,7 @@ class ReportController extends Controller
         return [
             'department_products' => $dep_prods,
             'personal_products' => $per_prods,
+            'descriptions' => $descriptions,
             'users' => $this->users_arr,
             'dept_products_arr' => $this->dept_products_arr,
             'per_products_arr' => $this->per_products_arr

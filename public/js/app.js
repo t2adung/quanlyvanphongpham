@@ -37302,6 +37302,18 @@ $(function () {
       $(this).find("input[name='btnCreateOrder']").show();
     }
 
+    var description = $('textarea[name=description]').val();
+
+    if (description != "") {
+      order_products += '<hr/>';
+      order_products += '<div class="row">';
+      order_products += '<div class="col-md-5">Ghi chú</div></div>';
+      order_products += '<div class="row">';
+      order_products += '<div class="col-md-12">';
+      order_products += '<textarea class="form-control-plaintext" name="description">' + description + '</textarea>';
+      order_products += '</div>';
+    }
+
     var month = $('#inputMonth :selected').val();
     var year = $('#inputYear :selected').val();
     $(this).find('input[name="month"]').val(month);

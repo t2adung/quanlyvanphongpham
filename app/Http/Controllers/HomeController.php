@@ -55,6 +55,7 @@ class HomeController extends Controller
             'current_month' => date('m'),
             'current_year' => date('Y'),
             'user_products' => $user_product_arr,
+            'user_order' => $user_order
         ]);
     }
 
@@ -62,6 +63,7 @@ class HomeController extends Controller
     {
         $product_ids = $request->product_ids;
         $product_quantities = $request->quantities;
+        $description = $request->description;
         $type = $request->type;
         $month = $request->month;
         $year = $request->year;
@@ -82,6 +84,10 @@ class HomeController extends Controller
             $order = Order::firstOrCreate($order);
     
             if (!empty($order)) {
+                if ($description != '') {
+                    $order->description = $description;
+                    $order->save();
+                }
                 foreach ($product_ids as $key => $id) {
                     $user_product = OrderProduct::where([
                         'order_id' => $order->id,

@@ -68,6 +68,10 @@
                                 </div> 
                             </div>
                         @endforeach
+                        <div class="form-group">
+                            <label for="description">Ghi chú</label>
+                            <textarea class="form-control" id="description" rows="3" name="description">{{ $user_order['description'] }}</textarea>
+                        </div>
                         <div class="text-left">
                             <!-- Button HTML (to Trigger Modal) -->
                             <a href="#orderModal" class="btn btn-primary trigger-btn" data-toggle="modal">Xác nhận</a>
